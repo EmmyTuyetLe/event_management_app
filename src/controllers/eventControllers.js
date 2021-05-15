@@ -19,22 +19,22 @@ if(req.query.title){
     conditions.title = req.query.title
 }
 if(req.query.cost){
-    conditions.author=req.query.cost
+    conditions.cost=req.query.cost
 }
 if(req.query.category){
-    conditions.author=req.query.category
+    conditions.category=req.query.category
 }
 if(req.query.description){
-    conditions.author=req.query.description
+    conditions.description=req.query.description
 }
 if(req.query.purchaseCount){
-    conditions.author=req.query.purchaseCount
+    conditions.purchaseCount=req.query.purchaseCount
 }
 if(req.query.linkUrl){
-    conditions.author=req.query.linkUrl
+    conditions.linkUrl=req.query.linkUrl
 }
 if(req.query.tags){
-    conditions.author=req.query.tags
+    conditions.tags=req.query.tags
 }
     //check req.query for filters
     console.log(req.query)
