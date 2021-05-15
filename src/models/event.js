@@ -8,7 +8,8 @@ const eventSchema = new mongoose.Schema({
     },
     cost: {
         type: Number,
-        required: true
+        required: true,
+        minValue: 0
     },
     category:  {
         type: String, 
