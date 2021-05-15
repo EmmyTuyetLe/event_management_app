@@ -1,7 +1,6 @@
 const Event = require('../models/event');
 exports.createNewEvent = function(req, res){
     //retrieve new Event details from req body
-    {}
     Event.create({
      ...req.body
     }, (err, newEvent)=>{
@@ -24,7 +23,7 @@ exports.fetchEvents = (req, res) => {
     //if there is filters, use them in Model.find query
     //fetch all Events
   Event.find(conditions, (err, events) => {
-      if  (err){
+      if  (err) {
           return res.status(500).json({ message: err })
       } else {
           return res.status(200).json({ events })
