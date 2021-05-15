@@ -20,7 +20,7 @@ const eventSchema = new mongoose.Schema({
     description: String,
     purchaseCount: Number,
     linkUrl: String,
-    tags: Array,
+    tags: Array
 })
 const Event = mongoose.model('Event', eventSchema); //'Event' represents collection in the eventapp database, created from eventSchema
 module.exports = Event;

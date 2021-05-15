@@ -24,9 +24,9 @@ exports.fetchEvents = (req, res) => {
     //fetch all Events
   Event.find((conditions), (err, events) => {
       if  (err){
-          return res.status(500).json({message: err})
+          return res.status(500).json({ message: err })
       } else {
-          return res.status(200).json({events})
+          return res.status(200).json({ events })
       }
   })
 }
@@ -46,22 +46,28 @@ exports.updateSingleEvent = (req,res) => {
         if (err) {
             return res.status(500).json({ message:err })
         } else if (!event) {
-                return res.status(404).json({ message: "Event not found" })
+                return res.status(404).json({ message: "event not found" })
             } else {
-            return res.status(200).json({ message: 'Event updated successfully' })
+                event.save((err,savedEvent) => {
+                    if(err){
+                        return res.status(400).json({ message: err })
+                    } else {
+                        return res.status(200).json({ message: "event updated successfully" })
         }
     });
+}
+    })
 }
 exports.deleteSingleEvent = (req, res) => {
     Event.findByIdAndDelete(req.params.id, (err, event) => {
         if(err){
-            return res.status(500).json({message: err})
+            return res.status(500).json({ message: err })
         }
         else if (!event) {
-            return res.status(404).json({message:"event was not found"})
+            return res.status(404).json({ message:"event was not found" })
         }
         else {
-            return res.status(200).json({message: "Event deleted successfully"})
+            return res.status(200).json({ message: "event deleted successfully" })
         }
     }) 
  }
