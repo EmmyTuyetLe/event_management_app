@@ -15,34 +15,16 @@ exports.createNewEvent = function(req, res){
 
 exports.fetchEvents = (req, res) => {
     let conditions = {};
-if(req.query.title){
-    conditions.title = req.query.title
-}
-if(req.query.cost){
-    conditions.cost=req.query.cost
-}
-if(req.query.category){
-    conditions.category=req.query.category
-}
-if(req.query.description){
-    conditions.description=req.query.description
-}
-if(req.query.purchaseCount){
-    conditions.purchaseCount=req.query.purchaseCount
-}
-if(req.query.linkUrl){
-    conditions.linkUrl=req.query.linkUrl
-}
-if(req.query.tags){
-    conditions.tags=req.query.tags
-}
+    if(req.query.category){
+        conditions.category=req.query.category
+    }
     //check req.query for filters
     console.log(req.query)
     //if there is filters, use them in Model.find query
     //fetch all Events
-  Event.find({}, (err, events) => {
+  Event.find({conditions}, (err, events) => {
       if  (err){
-          return res.status(500).jsonjson({message: err})
+          return res.status(500).json({message: err})
       } else {
           return res.status(200).json({events})
       }
