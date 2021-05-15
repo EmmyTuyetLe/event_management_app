@@ -15,14 +15,14 @@ exports.createNewEvent = function(req, res){
 
 exports.fetchEvents = (req, res) => {
     let conditions = {};
-    if(req.query.category){
-        conditions.category=req.query.category
+    if(req.query.category) {
+        conditions.category = req.query.category
     }
     //check req.query for filters
     console.log(req.query)
     //if there is filters, use them in Model.find query
     //fetch all Events
-  Event.find({conditions}, (err, events) => {
+  Event.find((conditions), (err, events) => {
       if  (err){
           return res.status(500).json({message: err})
       } else {
