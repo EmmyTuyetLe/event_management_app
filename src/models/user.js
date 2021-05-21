@@ -16,6 +16,11 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String
+    },
+    role: {
+        type: String,
+        anum: ['regular', 'admin'],
+        default:'regular' 
     }
 });
 module.exports = mongoose.model('User', userSchema)
