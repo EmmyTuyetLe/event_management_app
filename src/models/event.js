@@ -14,7 +14,6 @@ const eventSchema = new mongoose.Schema({
     category:  {
         type: String, 
         enum: ["business", "casual", "party", "sports", "general"],
-        required: true,
         default: "general"
     },
     description: String,

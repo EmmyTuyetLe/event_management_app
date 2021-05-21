@@ -24,10 +24,11 @@ console.log(decodedToken);
 req.user = decodedToken;
     next()
 })  
+}
 
-exports.checkIfAdmin = (req, res ,next) => {
-  if(req.user.role !== "admin"){
+exports.checkIfAdmin = (req, res , next) => {
+  if(req.user.role !== "admin") {
       return res.status(401).json({message: "this route is restricted to admin users"})
   } 
-  next() 
-}}
+  return next() 
+}

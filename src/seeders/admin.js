@@ -10,9 +10,9 @@ User.findOne({role:"admin"}, (err,admin) => {
     }
 // if there is not an admin account, create one
 User.create({
-    firstName:"Book",
-    lastName: "Goblin",
-    username: "bookgoblin",
+    firstName:"John",
+    lastName: "Smith",
+    email: "johnsmith@gmail.com",
     role: "admin"
 }, (err, user) => {
     if(err) throw err
