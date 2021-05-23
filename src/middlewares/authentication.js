@@ -1,5 +1,4 @@
-const jwt = require('jsonwebtoken');
-const secret = 'verySecureSECRET';
+const{ decodedToken } = require('../services/jwtService');
 
 exports.authenticateUser = (req, res, next) => {
     // check if there is an authorization token
@@ -13,8 +12,7 @@ if(splittedHeader[0] !== "Bearer"){
 }
 let token = splittedHeader[1];
 //decode token
-jwt.verify(token, secret, (err, decodedToken) => {
-    if(err) return res.status(500).json({ err });
+let decodedToken = decodedToken(token);
 //check if valid token
     if(!decodedToken){
         return res.status(401).json({message: "invalid authorization token, please login"})
@@ -22,8 +20,7 @@ jwt.verify(token, secret, (err, decodedToken) => {
 // allow user to continue with request
 console.log(decodedToken);
 req.user = decodedToken;
-    next()
-})  
+    next()  
 }
 
 exports.checkIfAdmin = (req, res , next) => {

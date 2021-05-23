@@ -31,4 +31,3 @@ bcrypt.hash(password, salt, (err, hash) => {
 })
 
 }
-

@@ -1,6 +1,8 @@
 const express = require('express'); //require express module
 const app = express(); //start the app with the express function
-const port = 5000; //setup port at 5000
+require('dotenv').config();
+
+const port = process.env.PORT;
 const dbSetup = require ('./database/setup');
 
 //require routes

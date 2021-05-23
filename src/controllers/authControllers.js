@@ -1,8 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const secret = 'verySecureSECRET';
-const expiry = 3600;
+const { createToken } = require('../services/jwtService')
 exports.registerNewUser = (req,res) =>{
     // fetch user details from req.body
     // check if an user with this email exists
@@ -38,17 +36,10 @@ User.create({
               return res.status(500).json({ err })
           }  
          // create jwt for user
-        jwt.sign(
-            {
-            id: newUser._id,
-            email: newUser.email,
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            role: newUser.role
-        }, secret, {expiresIn: expiry}, (err, token) => {
-            if(err){
-                return res.status(500).json({ err })
-            }  
+          let token = createToken(newUser);
+          if(!token){
+              return res.status(500).json({message: "Sorry, could not authenticate. Please login."})
+          }
             //send token to user 
             return res.status(200).json({ 
                 message:"user registration successful",
@@ -59,7 +50,6 @@ User.create({
        })
     })
     })
-})
 }
 
 exports.loginUser= (req, res) => {
@@ -77,23 +67,14 @@ exports.loginUser= (req, res) => {
            return res.status(401).json({message: "incorrect password"})
        }
        //create a token
-       jwt.sign({
-           id: foundUser._id,
-           email: foundUser.email,
-           firstName: foundUser.firstName,
-           lastName: foundUser.lastName,
-           role: foundUser.role
-       }, secret, {
-           expiresIn: expiry
-       }, (err, token) =>{
-           if(err){
-               return res.status(500).json({err})
-           }
-           return res.status(200).json({
-               message: "user logged in",
-               token
+       let token = createToken(foundUser);
+       if(!token){
+           return res.status(500).json({message: "Sorry, could not authenticate. Please login."})
+       }
+    //send token to user
+    return res.status(200).json({
+     message: "user logged in",
+     token
            })
-       })
-       //send token to user
-    })
+        })
 }

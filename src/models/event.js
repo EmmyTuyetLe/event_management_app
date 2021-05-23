@@ -16,6 +16,10 @@ const eventSchema = new mongoose.Schema({
         enum: ["business", "casual", "party", "sports", "general"],
         default: "general"
     },
+    image:{
+        data: Buffer,
+        type: String
+    },
     description: String,
     purchaseCount: Number,
     linkUrl: String,
